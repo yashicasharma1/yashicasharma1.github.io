@@ -15,6 +15,9 @@ display:flex;
 justify-content:center;
 padding:20px;
 background:#0b0b1f;
+position:sticky;
+top:0;
+z-index:1000;
 }
 
 nav a{
@@ -22,6 +25,7 @@ color:#aaa;
 margin:0 20px;
 text-decoration:none;
 transition:0.3s;
+font-weight:500;
 }
 
 nav a:hover{
@@ -31,24 +35,66 @@ color:#bb86fc;
 .active{
 color:#bb86fc;
 border-bottom:2px solid #bb86fc;
+padding-bottom:5px;
 }
 
 section{
-padding:80px 10%;
+padding:100px 12%;
+}
+
+h1{
+font-size:48px;
+margin-bottom:20px;
+}
+
+h1 span{
+color:#bb86fc;
+}
+
+h2{
+color:#bb86fc;
+margin-bottom:40px;
+}
+
+p{
+color:#ccc;
+margin-bottom:15px;
+}
+
+.hero{
+display:flex;
+justify-content:space-between;
+align-items:center;
+flex-wrap:wrap;
+}
+
+.hero-img img{
+width:240px;
+border-radius:50%;
+border:4px solid #bb86fc;
 }
 
 .card{
 background:#151530;
-padding:25px;
+padding:30px;
 border-radius:15px;
-margin-bottom:20px;
+margin-bottom:25px;
 transition:0.3s;
 }
 
 .card:hover{
-box-shadow:0 0 20px #bb86fc;
+transform:translateY(-6px);
+box-shadow:0 0 25px #bb86fc;
 }
 
-h1 span, h2{
-color:#bb86fc;
+.grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+gap:25px;
+}
+
+footer{
+text-align:center;
+padding:40px;
+color:#aaa;
 }
