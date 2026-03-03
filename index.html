@@ -1,117 +1,163 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Yashica Sharma | Portfolio</title>
-<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+
 <style>
-body {
-  margin: 0;
-  font-family: Arial;
-  background: #f4f6f9;
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:'Poppins',sans-serif;
 }
 
-header {
-  background: linear-gradient(135deg, #667eea, #764ba2);
-  color: white;
-  text-align: center;
-  padding: 100px 20px;
+body{
+  background: radial-gradient(circle at top left,#1a1a3d,#0b0b1f);
+  color:white;
 }
 
-section {
-  padding: 50px 20px;
-  text-align: center;
+nav{
+  display:flex;
+  justify-content:center;
+  padding:20px;
 }
 
-h2 {
-  color: #333;
+nav a{
+  color:#aaa;
+  margin:0 20px;
+  text-decoration:none;
+  transition:0.3s;
 }
 
-.card {
-  background: white;
-  margin: 15px auto;
-  padding: 20px;
-  max-width: 700px;
-  border-radius: 10px;
-  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+nav a:hover{
+  color:#bb86fc;
 }
 
-footer {
-  background: #222;
-  color: white;
-  text-align: center;
-  padding: 20px;
+.hero{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:100px 10%;
+  flex-wrap:wrap;
+}
+
+.hero-text{
+  max-width:500px;
+}
+
+.hero-text h1{
+  font-size:48px;
+}
+
+.hero-text span{
+  color:#bb86fc;
+}
+
+.hero-text p{
+  margin:20px 0;
+  color:#ccc;
+}
+
+.btn{
+  padding:12px 25px;
+  background:#bb86fc;
+  border:none;
+  color:white;
+  border-radius:8px;
+  cursor:pointer;
+  transition:0.3s;
+}
+
+.btn:hover{
+  background:#9b5de5;
+}
+
+.hero-img img{
+  width:250px;
+  border-radius:50%;
+  border:4px solid #bb86fc;
+}
+
+.cards{
+  display:flex;
+  justify-content:center;
+  gap:30px;
+  padding:50px 10%;
+  flex-wrap:wrap;
+}
+
+.card{
+  background:#151530;
+  padding:30px;
+  border-radius:15px;
+  width:280px;
+  transition:0.3s;
+}
+
+.card:hover{
+  transform:translateY(-10px);
+  box-shadow:0 0 20px #bb86fc;
+}
+
+.card h3{
+  color:#bb86fc;
+  margin-bottom:15px;
+}
+
+footer{
+  text-align:center;
+  padding:30px;
+  color:#aaa;
 }
 </style>
 </head>
 
 <body>
 
-<header>
-  <h1>Hi, I'm Yashica Sharma</h1>
-  <p>Welcome to My Portfolio Website</p>
-</header>
+<nav>
+  <a href="#">Home</a>
+  <a href="#">Skills</a>
+  <a href="#">Projects</a>
+  <a href="#">Education</a>
+  <a href="#">Contact</a>
+</nav>
 
-<section>
-  <h2>Introduction</h2>
-  <div class="card">
-    <p>I am a motivated and hardworking individual passionate about learning and growing professionally.</p>
+<section class="hero">
+  <div class="hero-text">
+    <h1>Hi, I'm <span>Yashica</span></h1>
+    <p>Bachelor of Computer Science Student</p>
+    <p>I am passionate about technology, programming, and continuously learning new skills to build a strong career in the tech industry.</p>
+    <button class="btn">View Projects</button>
+  </div>
+
+  <div class="hero-img">
+    <img src="https://via.placeholder.com/250" alt="Profile Photo">
   </div>
 </section>
 
-<section>
-  <h2>Skills</h2>
+<section class="cards">
   <div class="card">
-    <p>Communication Skills</p>
-    <p>Teamwork</p>
-    <p>Leadership</p>
+    <h3>Who I Am</h3>
+    <p>A dedicated Computer Science student focused on academic excellence and practical learning.</p>
   </div>
-</section>
 
-<section>
-  <h2>Projects</h2>
   <div class="card">
-    <p>Project 1 – Description</p>
-    <p>Project 2 – Description</p>
+    <h3>What I Do</h3>
+    <p>I work on programming projects and explore new technologies to strengthen my technical skills.</p>
   </div>
-</section>
 
-<section>
-  <h2>Training</h2>
   <div class="card">
-    <p>Professional Training Details</p>
-  </div>
-</section>
-
-<section>
-  <h2>Certificates</h2>
-  <div class="card">
-    <p>Your Certification Name</p>
-  </div>
-</section>
-
-<section>
-  <h2>Achievements</h2>
-  <div class="card">
-    <p>Your Achievements</p>
-  </div>
-</section>
-
-<section>
-  <h2>Extra Curricular</h2>
-  <div class="card">
-    <p>Activities & Participation</p>
-  </div>
-</section>
-
-<section>
-  <h2>Education</h2>
-  <div class="card">
-    <p>Your Degree / School Name</p>
+    <h3>What I'm Learning</h3>
+    <p>Data Structures, Programming, Software Development, and modern computing concepts.</p>
   </div>
 </section>
 
 <footer>
-  <p>© 2026 Yashica Sharma</p>
+  © 2026 Yashica Sharma
 </footer>
 
 </body>
