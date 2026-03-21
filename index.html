@@ -1036,7 +1036,7 @@
     <p>© 2026 Yashica Sharma &nbsp;·&nbsp; Crafted with 💜 &nbsp;·&nbsp; B.Tech CSE @ LPU</p>
   </footer>
 
-  <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+  <script>
     function show(id) {
       document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
       const target = document.getElementById(id);
@@ -1067,4 +1067,13 @@
           position:fixed;bottom:20px;right:20px;background:#1a1a2e;
           border:1px solid rgba(168,85,247,0.3);border-radius:8px;
           padding:14px 20px;font-family:'DM Mono',monospace;font-size:0.75rem;
-          color:#a855f7;z-index:9999;a
+          color:#a855f7;z-index:9999;
+        `;
+        note.textContent = '💡 Add resume.pdf to your repo to enable download';
+        document.body.appendChild(note);
+        setTimeout(() => note.remove(), 4000);
+      }, 500);
+    }
+  </script>
+</body>
+</html>
