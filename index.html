@@ -825,7 +825,8 @@
         </div>
       </div>
       <div class="home-photo-wrap" style="position:relative">
-        <div class="photo-placeholder">👩‍💻</div>
+        <img class="home-photo" src="profile.JPG" alt="Yashica Sharma" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" />
+        <div class="photo-placeholder" style="display:none">👩‍💻</div>
         <div class="stat-card s1">
           <div class="num">4+</div>
           <div class="lbl">Projects</div>
@@ -988,11 +989,11 @@
       <h2 class="section-title fade-in">Get In <span>Touch</span></h2>
       <div class="contact-grid">
         <div class="contact-info">
-          <a class="contact-item" href="mailto:yashicasharma098@gmail.com">
+          <a class="contact-item" href="/cdn-cgi/l/email-protection#ea938b998283898b99828b98878bdad3d2aa8d878b8386c4898587">
             <div class="contact-icon">✉️</div>
             <div>
               <div class="contact-label">Email</div>
-              <div class="contact-value">yashicasharma098@gmail.com</div>
+              <div class="contact-value"><span class="__cf_email__" data-cfemail="f188908299989290829990839c90c1c8c9b1969c90989ddf929e9c">[email&#160;protected]</span></div>
             </div>
           </a>
           <a class="contact-item" href="tel:+918427609924">
@@ -1035,7 +1036,7 @@
     <p>© 2026 Yashica Sharma &nbsp;·&nbsp; Crafted with 💜 &nbsp;·&nbsp; B.Tech CSE @ LPU</p>
   </footer>
 
-  <script>
+  <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
     function show(id) {
       document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
       const target = document.getElementById(id);
@@ -1066,13 +1067,4 @@
           position:fixed;bottom:20px;right:20px;background:#1a1a2e;
           border:1px solid rgba(168,85,247,0.3);border-radius:8px;
           padding:14px 20px;font-family:'DM Mono',monospace;font-size:0.75rem;
-          color:#a855f7;z-index:9999;animation:fadeUp 0.3s ease;
-        `;
-        note.textContent = '💡 Add resume.pdf to your repo to enable download';
-        document.body.appendChild(note);
-        setTimeout(() => note.remove(), 4000);
-      }, 500);
-    }
-  </script>
-</body>
-</html>
+          color:#a855f7;z-index:9999;a
