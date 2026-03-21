@@ -1,35 +1,1078 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<title>Home | Yashica Sharma</title>
-<link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Yashica Sharma — Cybersecurity Portfolio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Mono:wght@300;400;500&family=Bricolage+Grotesque:wght@300;400;600&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #08080f;
+      --bg2: #0d0d1a;
+      --card: #111120;
+      --card2: #161628;
+      --accent: #a855f7;
+      --accent2: #7c3aed;
+      --accent3: #c084fc;
+      --green: #22d3a0;
+      --red: #f43f5e;
+      --text: #e2e2f0;
+      --muted: #6b6b8a;
+      --border: rgba(168,85,247,0.15);
+      --glow: rgba(168,85,247,0.3);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Bricolage Grotesque', sans-serif;
+      font-size: 16px;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* NOISE OVERLAY */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 9999;
+      opacity: 0.4;
+    }
+
+    /* ── GRID BACKGROUND ── */
+    .grid-bg {
+      position: fixed;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(168,85,247,0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(168,85,247,0.04) 1px, transparent 1px);
+      background-size: 60px 60px;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 18px 60px;
+      background: rgba(8,8,15,0.85);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav-logo {
+      font-family: 'Syne', sans-serif;
+      font-weight: 800;
+      font-size: 1.2rem;
+      color: var(--text);
+      letter-spacing: -0.03em;
+    }
+    .nav-logo span { color: var(--accent); }
+
+    .nav-links {
+      display: flex;
+      gap: 36px;
+      list-style: none;
+    }
+    .nav-links a {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.78rem;
+      color: var(--muted);
+      text-decoration: none;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      transition: color 0.2s;
+      position: relative;
+    }
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: -4px;
+      left: 0;
+      width: 0;
+      height: 1px;
+      background: var(--accent);
+      transition: width 0.3s;
+    }
+    .nav-links a:hover { color: var(--accent); }
+    .nav-links a:hover::after { width: 100%; }
+
+    .nav-cta {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.75rem;
+      color: var(--accent);
+      border: 1px solid var(--accent);
+      padding: 8px 18px;
+      border-radius: 4px;
+      text-decoration: none;
+      letter-spacing: 0.05em;
+      transition: all 0.2s;
+    }
+    .nav-cta:hover {
+      background: var(--accent);
+      color: #fff;
+    }
+
+    /* ── PAGES ── */
+    .page {
+      min-height: 100vh;
+      padding: 100px 60px 60px;
+      position: relative;
+      z-index: 1;
+      display: none;
+    }
+    .page.active { display: block; }
+
+    /* ── HOME ── */
+    #home {
+      display: none;
+      align-items: center;
+      min-height: 100vh;
+      padding: 0 60px;
+    }
+    #home.active {
+      display: flex;
+    }
+
+    .home-inner {
+      max-width: 1300px;
+      margin: 0 auto;
+      width: 100%;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 80px;
+      align-items: center;
+    }
+
+    .home-tag {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.75rem;
+      color: var(--green);
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .home-tag::before {
+      content: '';
+      width: 30px;
+      height: 1px;
+      background: var(--green);
+    }
+
+    .home-title {
+      font-family: 'Syne', sans-serif;
+      font-size: clamp(3rem, 6vw, 5.5rem);
+      font-weight: 800;
+      line-height: 1.0;
+      letter-spacing: -0.04em;
+      margin-bottom: 24px;
+    }
+    .home-title .line1 { color: var(--text); }
+    .home-title .line2 {
+      color: transparent;
+      -webkit-text-stroke: 1.5px var(--accent);
+    }
+    .home-title .line3 { color: var(--accent3); }
+
+    .home-desc {
+      font-size: 1.05rem;
+      color: var(--muted);
+      max-width: 520px;
+      margin-bottom: 40px;
+      line-height: 1.8;
+    }
+
+    .home-badges {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 44px;
+    }
+    .badge {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.72rem;
+      padding: 6px 14px;
+      border-radius: 100px;
+      border: 1px solid;
+      letter-spacing: 0.05em;
+    }
+    .badge-purple { border-color: var(--accent); color: var(--accent); background: rgba(168,85,247,0.08); }
+    .badge-green  { border-color: var(--green);  color: var(--green);  background: rgba(34,211,160,0.08); }
+    .badge-red    { border-color: var(--red);    color: var(--red);    background: rgba(244,63,94,0.08); }
+
+    .home-actions {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .btn-primary {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.8rem;
+      letter-spacing: 0.06em;
+      padding: 14px 28px;
+      background: var(--accent);
+      color: #fff;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      text-decoration: none;
+      transition: all 0.2s;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .btn-primary:hover {
+      background: var(--accent2);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 30px var(--glow);
+    }
+
+    .btn-outline {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.8rem;
+      letter-spacing: 0.06em;
+      padding: 14px 28px;
+      background: transparent;
+      color: var(--text);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      cursor: pointer;
+      text-decoration: none;
+      transition: all 0.2s;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .btn-outline:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+
+    /* Profile photo */
+    .home-photo-wrap {
+      position: relative;
+    }
+    .home-photo-wrap::before {
+      content: '';
+      position: absolute;
+      inset: -2px;
+      border-radius: 50%;
+      background: conic-gradient(var(--accent), var(--accent2), var(--accent3), var(--accent));
+      animation: spin 6s linear infinite;
+      z-index: 0;
+    }
+    .home-photo-wrap::after {
+      content: '';
+      position: absolute;
+      inset: 4px;
+      border-radius: 50%;
+      background: var(--bg);
+      z-index: 1;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    .home-photo {
+      width: 280px;
+      height: 280px;
+      border-radius: 50%;
+      object-fit: cover;
+      position: relative;
+      z-index: 2;
+      display: block;
+    }
+
+    .photo-placeholder {
+      width: 280px;
+      height: 280px;
+      border-radius: 50%;
+      background: var(--card2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 4rem;
+      position: relative;
+      z-index: 2;
+    }
+
+    /* Floating stats */
+    .stat-card {
+      position: absolute;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 12px 18px;
+      backdrop-filter: blur(10px);
+      z-index: 3;
+    }
+    .stat-card .num {
+      font-family: 'Syne', sans-serif;
+      font-size: 1.4rem;
+      font-weight: 800;
+      color: var(--accent);
+    }
+    .stat-card .lbl {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.65rem;
+      color: var(--muted);
+      letter-spacing: 0.08em;
+    }
+    .stat-card.s1 { bottom: 10px; left: -50px; }
+    .stat-card.s2 { top: 10px; right: -40px; }
+
+    /* ── SECTION STYLES ── */
+    .section-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .section-label {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.72rem;
+      color: var(--green);
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      margin-bottom: 10px;
+    }
+
+    .section-title {
+      font-family: 'Syne', sans-serif;
+      font-size: clamp(2rem, 3.5vw, 3rem);
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      margin-bottom: 50px;
+      line-height: 1.1;
+    }
+    .section-title span { color: var(--accent); }
+
+    /* ── SKILLS ── */
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+
+    .skill-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 28px;
+      transition: all 0.3s;
+      position: relative;
+      overflow: hidden;
+    }
+    .skill-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 3px;
+      background: linear-gradient(90deg, var(--accent), var(--accent2));
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+    .skill-card:hover { border-color: var(--accent); transform: translateY(-4px); }
+    .skill-card:hover::before { opacity: 1; }
+
+    .skill-icon {
+      font-size: 2rem;
+      margin-bottom: 14px;
+    }
+    .skill-cat {
+      font-family: 'Syne', sans-serif;
+      font-weight: 700;
+      font-size: 1rem;
+      margin-bottom: 12px;
+      color: var(--text);
+    }
+    .skill-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    .skill-tag {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.7rem;
+      padding: 4px 10px;
+      border-radius: 4px;
+      background: var(--card2);
+      color: var(--muted);
+      border: 1px solid var(--border);
+    }
+
+    /* ── PROJECTS ── */
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px;
+    }
+
+    .project-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 30px;
+      transition: all 0.3s;
+      position: relative;
+      overflow: hidden;
+    }
+    .project-card::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at top left, rgba(168,85,247,0.06), transparent 60%);
+      pointer-events: none;
+    }
+    .project-card:hover {
+      border-color: rgba(168,85,247,0.4);
+      transform: translateY(-4px);
+      box-shadow: 0 20px 50px rgba(168,85,247,0.1);
+    }
+
+    .project-num {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.7rem;
+      color: var(--accent);
+      letter-spacing: 0.1em;
+      margin-bottom: 14px;
+    }
+    .project-name {
+      font-family: 'Syne', sans-serif;
+      font-size: 1.15rem;
+      font-weight: 700;
+      margin-bottom: 10px;
+      color: var(--text);
+    }
+    .project-desc {
+      font-size: 0.9rem;
+      color: var(--muted);
+      line-height: 1.7;
+      margin-bottom: 18px;
+    }
+    .project-stack {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+    .stack-tag {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.65rem;
+      padding: 3px 9px;
+      border-radius: 3px;
+      background: rgba(168,85,247,0.12);
+      color: var(--accent3);
+    }
+
+    /* ── EDUCATION ── */
+    .edu-timeline {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      position: relative;
+    }
+    .edu-timeline::before {
+      content: '';
+      position: absolute;
+      left: 16px;
+      top: 10px;
+      bottom: 10px;
+      width: 1px;
+      background: linear-gradient(to bottom, var(--accent), transparent);
+    }
+
+    .edu-item {
+      display: grid;
+      grid-template-columns: 36px 1fr;
+      gap: 24px;
+      padding-bottom: 40px;
+    }
+
+    .edu-dot {
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      background: var(--accent);
+      margin-top: 5px;
+      box-shadow: 0 0 12px var(--glow);
+      flex-shrink: 0;
+      position: relative;
+      z-index: 1;
+      margin-left: 9px;
+    }
+
+    .edu-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 28px;
+      transition: all 0.3s;
+    }
+    .edu-card:hover {
+      border-color: rgba(168,85,247,0.3);
+    }
+
+    .edu-degree {
+      font-family: 'Syne', sans-serif;
+      font-weight: 700;
+      font-size: 1.1rem;
+      margin-bottom: 4px;
+    }
+    .edu-school {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.78rem;
+      color: var(--accent);
+      margin-bottom: 12px;
+    }
+    .edu-meta {
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+    .edu-gpa {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.8rem;
+      color: var(--green);
+    }
+    .edu-note {
+      font-size: 0.87rem;
+      color: var(--muted);
+      margin-top: 10px;
+    }
+
+    /* ── INTERNSHIP ── */
+    .intern-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 36px;
+      position: relative;
+      overflow: hidden;
+      margin-bottom: 20px;
+    }
+    .intern-card::before {
+      content: '';
+      position: absolute;
+      left: 0; top: 0; bottom: 0;
+      width: 3px;
+      background: linear-gradient(to bottom, var(--accent), var(--accent2));
+    }
+
+    .intern-role {
+      font-family: 'Syne', sans-serif;
+      font-size: 1.3rem;
+      font-weight: 700;
+      margin-bottom: 4px;
+    }
+    .intern-company {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.8rem;
+      color: var(--accent);
+      margin-bottom: 6px;
+    }
+    .intern-period {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.72rem;
+      color: var(--muted);
+      margin-bottom: 22px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .intern-period::before {
+      content: '';
+      width: 20px;
+      height: 1px;
+      background: var(--muted);
+    }
+
+    .intern-bullets {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .intern-bullets li {
+      display: flex;
+      gap: 12px;
+      font-size: 0.92rem;
+      color: var(--muted);
+      align-items: flex-start;
+    }
+    .intern-bullets li::before {
+      content: '▸';
+      color: var(--accent);
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+
+    /* ── CONTACT ── */
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+    }
+
+    .contact-info {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .contact-item {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 18px 22px;
+      text-decoration: none;
+      transition: all 0.3s;
+    }
+    .contact-item:hover {
+      border-color: var(--accent);
+      transform: translateX(6px);
+    }
+
+    .contact-icon {
+      font-size: 1.3rem;
+      width: 40px;
+      height: 40px;
+      background: rgba(168,85,247,0.1);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .contact-label {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.65rem;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-bottom: 2px;
+    }
+    .contact-value {
+      font-size: 0.9rem;
+      color: var(--text);
+    }
+
+    /* Resume download panel */
+    .resume-panel {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 36px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .resume-panel::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at top right, rgba(168,85,247,0.08), transparent 60%);
+    }
+    .resume-panel h3 {
+      font-family: 'Syne', sans-serif;
+      font-size: 1.4rem;
+      font-weight: 800;
+      margin-bottom: 10px;
+      position: relative;
+    }
+    .resume-panel p {
+      font-size: 0.9rem;
+      color: var(--muted);
+      margin-bottom: 28px;
+      position: relative;
+    }
+    .resume-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-family: 'DM Mono', monospace;
+      font-size: 0.82rem;
+      letter-spacing: 0.05em;
+      padding: 16px 28px;
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      text-decoration: none;
+      transition: all 0.3s;
+      position: relative;
+      width: fit-content;
+      box-shadow: 0 4px 20px rgba(168,85,247,0.3);
+    }
+    .resume-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 30px rgba(168,85,247,0.5);
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      position: relative;
+      z-index: 1;
+      text-align: center;
+      padding: 30px;
+      border-top: 1px solid var(--border);
+      font-family: 'DM Mono', monospace;
+      font-size: 0.72rem;
+      color: var(--muted);
+    }
+
+    /* ── ANIMATIONS ── */
+    .fade-in {
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeUp 0.6s ease forwards;
+    }
+    @keyframes fadeUp {
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .d1 { animation-delay: 0.1s; }
+    .d2 { animation-delay: 0.2s; }
+    .d3 { animation-delay: 0.3s; }
+    .d4 { animation-delay: 0.4s; }
+    .d5 { animation-delay: 0.5s; }
+
+    /* ── TERMINAL BLINK ── */
+    .cursor {
+      display: inline-block;
+      width: 3px;
+      height: 1.1em;
+      background: var(--accent);
+      vertical-align: text-bottom;
+      animation: blink 1s step-end infinite;
+    }
+    @keyframes blink { 50% { opacity: 0; } }
+
+    /* ── MOBILE ── */
+    @media (max-width: 768px) {
+      nav { padding: 14px 20px; }
+      .nav-links { display: none; }
+      .page { padding: 90px 20px 40px; }
+      #home { padding: 90px 20px 40px; }
+      .home-inner { grid-template-columns: 1fr; }
+      .home-photo-wrap { display: none; }
+      .skills-grid { grid-template-columns: 1fr; }
+      .projects-grid { grid-template-columns: 1fr; }
+      .contact-grid { grid-template-columns: 1fr; }
+    }
+  </style>
 </head>
 <body>
+  <div class="grid-bg"></div>
 
-<nav>
-<a href="index.html" class="active">Home</a>
-<a href="skills.html">Skills</a>
-<a href="projects.html">Projects</a>
-<a href="education.html">Education</a>
-<a href="internship.html">Internship</a>
-<a href="contact.html">Contact</a>
-</nav>
+  <!-- NAV -->
+  <nav>
+    <div class="nav-logo">YS<span>.</span></div>
+    <ul class="nav-links">
+      <li><a href="#" onclick="show('home')">Home</a></li>
+      <li><a href="#" onclick="show('skills')">Skills</a></li>
+      <li><a href="#" onclick="show('projects')">Projects</a></li>
+      <li><a href="#" onclick="show('education')">Education</a></li>
+      <li><a href="#" onclick="show('internship')">Internship</a></li>
+      <li><a href="#" onclick="show('contact')">Contact</a></li>
+    </ul>
+    <a class="nav-cta" href="#" onclick="show('contact')">Get in touch →</a>
+  </nav>
 
-<section class="hero">
-<div>
-<h1>Hi, I'm <span>Yashica Sharma</span></h1>
-<p>B.Tech Computer Science & Engineering Student</p>
-<p>Cybersecurity & Networking Enthusiast focused on penetration testing, automation tools, and network security.</p>
-</div>
+  <!-- HOME -->
+  <section id="home" class="page active">
+    <div class="home-inner">
+      <div>
+        <div class="home-tag fade-in d1">Available for opportunities</div>
+        <h1 class="home-title fade-in d2">
+          <div class="line1">Hi, I'm</div>
+          <div class="line2">Yashica</div>
+          <div class="line3">Sharma<span class="cursor"></span></div>
+        </h1>
+        <p class="home-desc fade-in d3">
+          B.Tech CSE student specializing in <strong style="color:var(--text)">Cybersecurity & Networking</strong> — focused on penetration testing, automation tools, and network security.
+        </p>
+        <div class="home-badges fade-in d4">
+          <span class="badge badge-purple">Penetration Testing</span>
+          <span class="badge badge-green">Network Security</span>
+          <span class="badge badge-red">Kali Linux</span>
+          <span class="badge badge-purple">Python / C++</span>
+          <span class="badge badge-green">OSINT</span>
+        </div>
+        <div class="home-actions fade-in d5">
+          <a class="btn-primary" href="#" onclick="downloadResume()">⬇ Download Resume</a>
+          <a class="btn-outline" href="#" onclick="show('projects')">View Projects →</a>
+        </div>
+      </div>
+      <div class="home-photo-wrap" style="position:relative">
+        <div class="photo-placeholder">👩‍💻</div>
+        <div class="stat-card s1">
+          <div class="num">4+</div>
+          <div class="lbl">Projects</div>
+        </div>
+        <div class="stat-card s2">
+          <div class="num">7.75</div>
+          <div class="lbl">CGPA</div>
+        </div>
+      </div>
+    </div>
+  </section>
 
-<div class="hero-img">
-<img src="profile1.JPG">
-</div>
-</section>
+  <!-- SKILLS -->
+  <section id="skills" class="page">
+    <div class="section-inner">
+      <div class="section-label">02 / expertise</div>
+      <h2 class="section-title fade-in">Skills &amp; <span>Expertise</span></h2>
+      <div class="skills-grid">
+        <div class="skill-card fade-in d1">
+          <div class="skill-icon">💻</div>
+          <div class="skill-cat">Languages</div>
+          <div class="skill-tags">
+            <span class="skill-tag">C++</span>
+            <span class="skill-tag">Python</span>
+            <span class="skill-tag">C</span>
+            <span class="skill-tag">Java</span>
+          </div>
+        </div>
+        <div class="skill-card fade-in d2">
+          <div class="skill-icon">🛡️</div>
+          <div class="skill-cat">Tools & Platforms</div>
+          <div class="skill-tags">
+            <span class="skill-tag">Cisco Packet Tracer</span>
+            <span class="skill-tag">Wireshark</span>
+            <span class="skill-tag">Metasploit</span>
+            <span class="skill-tag">Nmap</span>
+            <span class="skill-tag">Kali Linux</span>
+          </div>
+        </div>
+        <div class="skill-card fade-in d3">
+          <div class="skill-icon">🤝</div>
+          <div class="skill-cat">Soft Skills</div>
+          <div class="skill-tags">
+            <span class="skill-tag">Communication</span>
+            <span class="skill-tag">Problem Solving</span>
+            <span class="skill-tag">Team Collaboration</span>
+            <span class="skill-tag">Professional Attitude</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 
-<footer>
-© 2026 Yashica Sharma
-</footer>
+  <!-- PROJECTS -->
+  <section id="projects" class="page">
+    <div class="section-inner">
+      <div class="section-label">03 / work</div>
+      <h2 class="section-title fade-in">Featured <span>Projects</span></h2>
+      <div class="projects-grid">
+        <div class="project-card fade-in d1">
+          <div class="project-num">01 — Security</div>
+          <div class="project-name">Internal Network Compromise Simulation</div>
+          <p class="project-desc">Simulated internal penetration testing using Kali Linux and Metasploitable. Conducted Nmap scanning, service enumeration, and exploited FTP vulnerability using Metasploit to achieve root-level access.</p>
+          <div class="project-stack">
+            <span class="stack-tag">Kali Linux</span>
+            <span class="stack-tag">Metasploit</span>
+            <span class="stack-tag">Nmap</span>
+          </div>
+        </div>
+        <div class="project-card fade-in d2">
+          <div class="project-num">02 — OSINT</div>
+          <div class="project-name">OSINT Recon Automation Tool</div>
+          <p class="project-desc">Developed an automated OSINT system for domain intelligence gathering including WHOIS analysis, subdomain enumeration, structured reporting, and SQLite logging.</p>
+          <div class="project-stack">
+            <span class="stack-tag">Python</span>
+            <span class="stack-tag">SQLite</span>
+            <span class="stack-tag">WHOIS</span>
+          </div>
+        </div>
+        <div class="project-card fade-in d3">
+          <div class="project-num">03 — Networking</div>
+          <div class="project-name">Python Multi-Threaded Port Scanner</div>
+          <p class="project-desc">Built a concurrent port scanning tool using Python sockets and multi-threading to perform fast network reconnaissance and detect open ports in real time.</p>
+          <div class="project-stack">
+            <span class="stack-tag">Python</span>
+            <span class="stack-tag">Sockets</span>
+            <span class="stack-tag">Multi-threading</span>
+          </div>
+        </div>
+        <div class="project-card fade-in d4">
+          <div class="project-num">04 — Analysis</div>
+          <div class="project-name">Python Packet Sniffer</div>
+          <p class="project-desc">Created a real-time packet monitoring tool using Scapy to analyze TCP, UDP, ICMP, and ARP traffic with source and destination tracking.</p>
+          <div class="project-stack">
+            <span class="stack-tag">Python</span>
+            <span class="stack-tag">Scapy</span>
+            <span class="stack-tag">TCP/UDP</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 
+  <!-- EDUCATION -->
+  <section id="education" class="page">
+    <div class="section-inner">
+      <div class="section-label">04 / background</div>
+      <h2 class="section-title fade-in">Educational <span>Journey</span></h2>
+      <div class="edu-timeline">
+        <div class="edu-item fade-in d1">
+          <div><div class="edu-dot"></div></div>
+          <div class="edu-card">
+            <div class="edu-degree">Bachelor of Technology — Computer Science &amp; Engineering</div>
+            <div class="edu-school">Lovely Professional University</div>
+            <div class="edu-meta">
+              <span class="edu-gpa">CGPA: 7.75</span>
+              <span style="font-family:'DM Mono',monospace;font-size:0.72rem;color:var(--muted)">2023 — Present</span>
+            </div>
+            <p class="edu-note">Focused on Cybersecurity, Networking, and Software Development.</p>
+          </div>
+        </div>
+        <div class="edu-item fade-in d2">
+          <div><div class="edu-dot"></div></div>
+          <div class="edu-card">
+            <div class="edu-degree">Intermediate (PCM)</div>
+            <div class="edu-school">Bhartiya Vidya Mandir School</div>
+            <div class="edu-meta">
+              <span class="edu-gpa">90%</span>
+              <span style="font-family:'DM Mono',monospace;font-size:0.72rem;color:var(--muted)">2022 — 2023</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- INTERNSHIP -->
+  <section id="internship" class="page">
+    <div class="section-inner">
+      <div class="section-label">05 / experience</div>
+      <h2 class="section-title fade-in">Internship <span>Experience</span></h2>
+      <div class="intern-card fade-in d1">
+        <div class="intern-role">Next Gen Networking</div>
+        <div class="intern-company">Lovely Professional University</div>
+        <div class="intern-period">June 2025 — July 2025</div>
+        <ul class="intern-bullets">
+          <li>Worked on network design and simulation tools.</li>
+          <li>Configured real-world networking devices.</li>
+          <li>Planned and managed small to medium-scale networks.</li>
+          <li>Improved problem-solving and technical communication skills.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact" class="page">
+    <div class="section-inner">
+      <div class="section-label">06 / connect</div>
+      <h2 class="section-title fade-in">Get In <span>Touch</span></h2>
+      <div class="contact-grid">
+        <div class="contact-info">
+          <a class="contact-item" href="mailto:yashicasharma098@gmail.com">
+            <div class="contact-icon">✉️</div>
+            <div>
+              <div class="contact-label">Email</div>
+              <div class="contact-value">yashicasharma098@gmail.com</div>
+            </div>
+          </a>
+          <a class="contact-item" href="tel:+918427609924">
+            <div class="contact-icon">📱</div>
+            <div>
+              <div class="contact-label">Mobile</div>
+              <div class="contact-value">+91 8427609924</div>
+            </div>
+          </a>
+          <a class="contact-item" href="https://github.com/yashicasharma1" target="_blank">
+            <div class="contact-icon">🐙</div>
+            <div>
+              <div class="contact-label">GitHub</div>
+              <div class="contact-value">github.com/yashicasharma1</div>
+            </div>
+          </a>
+          <a class="contact-item" href="https://linkedin.com/in/sharma-yashica" target="_blank">
+            <div class="contact-icon">💼</div>
+            <div>
+              <div class="contact-label">LinkedIn</div>
+              <div class="contact-value">linkedin.com/in/sharma-yashica</div>
+            </div>
+          </a>
+        </div>
+        <div class="resume-panel">
+          <h3>📄 My Resume</h3>
+          <p>Download my latest resume to learn more about my skills, projects, and experience in cybersecurity and networking.</p>
+          <a class="resume-btn" href="#" onclick="downloadResume()">
+            ⬇ Download Resume (PDF)
+          </a>
+          <p style="margin-top:16px;font-family:'DM Mono',monospace;font-size:0.68rem;color:var(--muted);margin-bottom:0">
+            Replace the placeholder with your actual resume PDF file
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <p>© 2026 Yashica Sharma &nbsp;·&nbsp; Crafted with 💜 &nbsp;·&nbsp; B.Tech CSE @ LPU</p>
+  </footer>
+
+  <script>
+    function show(id) {
+      document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+      const target = document.getElementById(id);
+      target.classList.add('active');
+      // re-trigger animations
+      target.querySelectorAll('.fade-in').forEach(el => {
+        el.style.animation = 'none';
+        el.offsetHeight;
+        el.style.animation = '';
+      });
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function downloadResume() {
+      // Replace 'resume.pdf' with your actual resume file path or URL
+      // For GitHub Pages, place resume.pdf in the same repo folder
+      const link = document.createElement('a');
+      link.href = 'resume.pdf';
+      link.download = 'Yashica_Sharma_Resume.pdf';
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+
+      // Fallback message if file not found
+      setTimeout(() => {
+        const note = document.createElement('div');
+        note.style.cssText = `
+          position:fixed;bottom:20px;right:20px;background:#1a1a2e;
+          border:1px solid rgba(168,85,247,0.3);border-radius:8px;
+          padding:14px 20px;font-family:'DM Mono',monospace;font-size:0.75rem;
+          color:#a855f7;z-index:9999;animation:fadeUp 0.3s ease;
+        `;
+        note.textContent = '💡 Add resume.pdf to your repo to enable download';
+        document.body.appendChild(note);
+        setTimeout(() => note.remove(), 4000);
+      }, 500);
+    }
+  </script>
 </body>
 </html>
