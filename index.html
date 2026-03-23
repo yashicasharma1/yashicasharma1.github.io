@@ -186,8 +186,8 @@
     }
     .home-title .line1 { color: var(--text); }
     .home-title .line2 {
-      color: transparent;
-      -webkit-text-stroke: 1.5px var(--accent);
+      color: var(--accent);
+      text-shadow: 0 0 40px rgba(168,85,247,0.5);
     }
     .home-title .line3 { color: var(--accent3); }
 
@@ -900,6 +900,7 @@
     <div class="nav-logo">YS<span>.</span></div>
     <ul class="nav-links">
       <li><a href="#" data-page="home">Home</a></li>
+      <li><a href="#" data-page="about">About</a></li>
       <li><a href="#" data-page="skills">Skills</a></li>
       <li><a href="#" data-page="projects">Projects</a></li>
       <li><a href="#" data-page="education">Education</a></li>
@@ -950,6 +951,121 @@
         <div class="stat-card s2">
           <div class="num">7.75</div>
           <div class="lbl">CGPA</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section id="about" class="page">
+    <div class="section-inner">
+      <div class="section-label">01 / about</div>
+      <h2 class="section-title fade-in">About <span>Me</span></h2>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:24px;align-items:start">
+
+        <!-- Left column -->
+        <div style="display:flex;flex-direction:column;gap:20px">
+
+          <div class="skill-card fade-in d1" style="padding:32px">
+            <div style="font-family:'DM Mono',monospace;font-size:0.7rem;color:var(--green);letter-spacing:0.15em;margin-bottom:14px">WHO AM I</div>
+            <p style="color:var(--muted);line-height:1.9;font-size:0.96rem">
+              I'm <strong style="color:var(--text)">Yashica Sharma</strong>, a B.Tech Computer Science & Engineering student at <strong style="color:var(--accent)">Lovely Professional University</strong>, passionate about cybersecurity and building tools that make systems safer.
+            </p>
+            <p style="color:var(--muted);line-height:1.9;font-size:0.96rem;margin-top:12px">
+              I specialize in <strong style="color:var(--text)">penetration testing, network security, and automation</strong> — from simulating real-world attacks to writing tools that detect and analyze threats in real time.
+            </p>
+            <p style="color:var(--muted);line-height:1.9;font-size:0.96rem;margin-top:12px">
+              I believe in learning by doing — every project I build teaches me something new about how systems work and how they fail.
+            </p>
+          </div>
+
+          <div class="skill-card fade-in d2" style="padding:28px">
+            <div style="font-family:'DM Mono',monospace;font-size:0.7rem;color:var(--green);letter-spacing:0.15em;margin-bottom:14px">CURRENTLY EXPLORING</div>
+            <div style="display:flex;flex-wrap:wrap;gap:8px">
+              <span class="badge badge-purple">Web App Security</span>
+              <span class="badge badge-green">Bug Bounty Hunting</span>
+              <span class="badge badge-red">CTF Challenges</span>
+              <span class="badge badge-purple">Network Forensics</span>
+              <span class="badge badge-green">Linux Hardening</span>
+            </div>
+          </div>
+
+          <div class="skill-card fade-in d3" style="padding:28px;background:linear-gradient(135deg,rgba(168,85,247,0.08),rgba(124,58,237,0.04))">
+            <div style="font-family:'DM Mono',monospace;font-size:0.7rem;color:var(--green);letter-spacing:0.15em;margin-bottom:12px">MY GOAL</div>
+            <p style="color:var(--muted);line-height:1.85;font-size:0.93rem">
+              To become a skilled <strong style="color:var(--accent3)">cybersecurity professional</strong> who protects digital infrastructure — contributing to a safer, more secure internet for everyone.
+            </p>
+            <div style="margin-top:18px">
+              <a class="btn-primary" href="#" data-page="contact" style="font-size:0.75rem;padding:10px 20px">Let's Connect →</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right column -->
+        <div style="display:flex;flex-direction:column;gap:20px">
+
+          <div class="skill-card fade-in d2" style="padding:28px">
+            <div style="font-family:'DM Mono',monospace;font-size:0.7rem;color:var(--green);letter-spacing:0.15em;margin-bottom:18px">QUICK FACTS</div>
+            <div style="display:flex;flex-direction:column;gap:0">
+              <div style="display:flex;justify-content:space-between;align-items:center;padding:12px 0;border-bottom:1px solid var(--border)">
+                <span style="font-family:'DM Mono',monospace;font-size:0.76rem;color:var(--muted)">🎓 Degree</span>
+                <span style="font-size:0.87rem;color:var(--text)">B.Tech CSE</span>
+              </div>
+              <div style="display:flex;justify-content:space-between;align-items:center;padding:12px 0;border-bottom:1px solid var(--border)">
+                <span style="font-family:'DM Mono',monospace;font-size:0.76rem;color:var(--muted)">🏫 University</span>
+                <span style="font-size:0.87rem;color:var(--text)">LPU (2023 – Present)</span>
+              </div>
+              <div style="display:flex;justify-content:space-between;align-items:center;padding:12px 0;border-bottom:1px solid var(--border)">
+                <span style="font-family:'DM Mono',monospace;font-size:0.76rem;color:var(--muted)">📊 CGPA</span>
+                <span style="font-size:0.87rem;color:var(--green);font-weight:600">7.75</span>
+              </div>
+              <div style="display:flex;justify-content:space-between;align-items:center;padding:12px 0;border-bottom:1px solid var(--border)">
+                <span style="font-family:'DM Mono',monospace;font-size:0.76rem;color:var(--muted)">🗂️ Projects</span>
+                <span style="font-size:0.87rem;color:var(--accent)">4+</span>
+              </div>
+              <div style="display:flex;justify-content:space-between;align-items:center;padding:12px 0;border-bottom:1px solid var(--border)">
+                <span style="font-family:'DM Mono',monospace;font-size:0.76rem;color:var(--muted)">🏅 Certificates</span>
+                <span style="font-size:0.87rem;color:var(--accent)">4+</span>
+              </div>
+              <div style="display:flex;justify-content:space-between;align-items:center;padding:12px 0;border-bottom:1px solid var(--border)">
+                <span style="font-family:'DM Mono',monospace;font-size:0.76rem;color:var(--muted)">💼 Internship</span>
+                <span style="font-size:0.87rem;color:var(--text)">Next Gen Networking</span>
+              </div>
+              <div style="display:flex;justify-content:space-between;align-items:center;padding:12px 0">
+                <span style="font-family:'DM Mono',monospace;font-size:0.76rem;color:var(--muted)">📍 Location</span>
+                <span style="font-size:0.87rem;color:var(--text)">India</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Focus areas -->
+          <div class="skill-card fade-in d3" style="padding:28px">
+            <div style="font-family:'DM Mono',monospace;font-size:0.7rem;color:var(--green);letter-spacing:0.15em;margin-bottom:16px">AREAS OF FOCUS</div>
+            <div style="display:flex;flex-direction:column;gap:12px">
+              <div style="display:flex;align-items:center;gap:12px">
+                <span style="font-size:1.2rem">🔐</span>
+                <div>
+                  <div style="font-size:0.9rem;color:var(--text);font-weight:600">Penetration Testing</div>
+                  <div style="font-size:0.8rem;color:var(--muted)">Kali Linux, Metasploit, Nmap</div>
+                </div>
+              </div>
+              <div style="display:flex;align-items:center;gap:12px">
+                <span style="font-size:1.2rem">🌐</span>
+                <div>
+                  <div style="font-size:0.9rem;color:var(--text);font-weight:600">Network Security</div>
+                  <div style="font-size:0.8rem;color:var(--muted)">Wireshark, Cisco Packet Tracer</div>
+                </div>
+              </div>
+              <div style="display:flex;align-items:center;gap:12px">
+                <span style="font-size:1.2rem">🤖</span>
+                <div>
+                  <div style="font-size:0.9rem;color:var(--text);font-weight:600">Security Automation</div>
+                  <div style="font-size:0.8rem;color:var(--muted)">Python, Scapy, OSINT tools</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
         </div>
       </div>
     </div>
@@ -1165,13 +1281,13 @@
       <h2 class="section-title fade-in">Get In <span>Touch</span></h2>
       <div class="contact-grid">
         <div class="contact-info">
-          <a class="contact-item" href="/cdn-cgi/l/email-protection#a2dbc3d1cacbc1c3d1cac3d0cfc3929b9ae2c5cfc3cbce8cc1cdcf">
-  <div class="contact-icon">✉️</div>
-  <div>
-    <div class="contact-label">Email</div>
-    <div class="contact-value"><span class="__cf_email__" data-cfemail="3c455d4f54555f5d4f545d4e515d0c05047c5b515d5550125f5351">[email&#160;protected]</span></div>
-  </div>
-</a>
+          <a class="contact-item" href="mailto:yashicasharma098@gmail.com">
+            <div class="contact-icon">✉️</div>
+            <div>
+              <div class="contact-label">Email</div>
+              <div class="contact-value">yashicasharma098@gmail.com</div>
+            </div>
+          </a>
           <a class="contact-item" href="tel:+918427609924">
             <div class="contact-icon">📱</div>
             <div>
